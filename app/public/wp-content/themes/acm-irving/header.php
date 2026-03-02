@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+    <meta charset="<?php bloginfo('charset'); ?>"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="<?php bloginfo('description'); ?>"/>
+    <?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+
+<header class="site-header">
+    <div class="header-inner">
+
+        <!-- Logo -->
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo" aria-label="<?php bloginfo('name'); ?> Home">
+            <!-- Desktop -->
+            <img
+                src="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo-1.gif"
+                alt="<?php bloginfo('name'); ?>"
+                class="logo-desktop"
+            />
+            <!-- Tablet -->
+            <img
+                src="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo_tablet.svg"
+                alt="<?php bloginfo('name'); ?>"
+                class="logo-tablet"
+            />
+            <!-- Mobile -->
+            <img
+                src="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo_mobile.svg"
+                alt="<?php bloginfo('name'); ?>"
+                class="logo-mobile"
+            />
+        </a>
+
+        <!-- Primary Navigation -->
+        <nav class="site-nav" aria-label="Primary Navigation">
+            <?php
+            wp_nav_menu([
+                'theme_location' => 'primary',
+                'menu_class'     => '',
+                'container'      => false,
+                'fallback_cb'    => 'acm_irving_fallback_menu',
+            ]);
+            ?>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</header>
+
+<?php
+/**
+ * Fallback menu if no menu is assigned in WP Admin.
+ * Shows basic links so the site isn't broken during setup.
+ */
+function acm_irving_fallback_menu() {
+    echo '<ul>';
+    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/about')) . '">About</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/events')) . '">Events</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/officers')) . '">Officers</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/resources')) . '">Resources</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/contact')) . '">Contact</a></li>';
+    echo '<li><a href="https://www.acm.org/membership" target="_blank" class="nav-cta">Join ACM</a></li>';
+    echo '</ul>';
+}
+?>
