@@ -227,17 +227,28 @@ acm-irving/                              ← Open THIS folder in VS Code
 ```
 1. Open VS Code at ~/Local Sites/acm-irving/
         ↓
-2. Edit theme files in app/public/wp-content/themes/acm-irving/
+2. Pull latest changes from main
+        git checkout main && git pull origin main
         ↓
-3. Preview changes at http://acm-irving.local (instant, no upload needed)
+3. Create a new branch for your work
+        git checkout -b feature/your-change
         ↓
-4. Happy with changes? Commit to Git:
+4. Edit theme files in app/public/wp-content/themes/acm-irving/
+        ↓
+5. Preview changes at http://acm-irving.local (instant, no upload needed)
+        ↓
+6. Commit and push your branch
         git add .
         git commit -m "describe what you changed"
-        git push origin main
+        git push origin feature/your-change
         ↓
-5. Deploy to production (see below)
+7. Open a Pull Request on GitHub for review
+        ↓
+8. Once approved and merged, deploy to production (see below)
 ```
+
+> **Never push directly to `main`.** All changes go through a Pull Request.
+> See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution guide.
 
 ### Common Edits
 
@@ -256,26 +267,34 @@ acm-irving/                              ← Open THIS folder in VS Code
 
 Always pull before starting work to get latest changes:
 ```bash
+git checkout main
 git pull origin main
+```
+
+Always work on a branch — never commit directly to `main`:
+```bash
+git checkout -b feature/your-change
 ```
 
 Write descriptive commit messages:
 ```bash
 # Good
-git commit -m "Update hero headline copy and button text"
-git commit -m "Add About page template"
-git commit -m "Fix mobile navigation menu overlap"
+git commit -m "feat: update hero headline copy and button text"
+git commit -m "feat: add About page template"
+git commit -m "fix: correct mobile navigation menu overlap"
 
 # Bad
 git commit -m "update"
 git commit -m "fix"
 ```
 
+For the full contribution workflow including how to open a Pull Request, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ---
 
 ## Deploying to Production
 
-After committing to GitHub, deploy your changes to the live site:
+Deployment is done by the chapter chair or maintainer after a PR is merged into `main`. If you have deploy access, here's how to push changes to the live site:
 
 ### Option A — Upload Changed Files Only (Recommended for small changes)
 
@@ -441,6 +460,20 @@ Copy the output and add it to **GitHub → Settings → SSH and GPG keys → New
 ```bash
 git remote set-url origin git@github.com:vichu/acm-irving-website.git
 ```
+
+---
+
+## Contributing
+
+We welcome contributions from all chapter members! Before making changes, please read [CONTRIBUTING.md](CONTRIBUTING.md) which covers:
+
+- How to create a branch and submit a Pull Request
+- Branch naming conventions
+- Commit message format
+- What types of changes are welcome
+- The review and merge process
+
+> **The short version:** never commit to `main` directly. Always create a branch, make your changes, and open a PR on GitHub for review.
 
 ---
 
