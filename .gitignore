@@ -1,48 +1,29 @@
-# Wordpress - ignore core, configuration, examples, uploads and logs.
-# https://github.com/github/gitignore/blob/main/WordPress.gitignore
+# Local dev & server config
+conf/
+logs/
 
-# Core
-#
-# Note: if you want to stage/commit WP core files
-# you can delete this whole section/until Configuration.
-/wp-admin/
-/wp-content/index.php
-/wp-content/languages
-/wp-content/plugins/index.php
-/wp-content/themes/index.php
-/wp-includes/
-/index.php
-/license.txt
-/readme.html
-/wp-*.php
-/xmlrpc.php
+# Credentials — never commit
+.vscode/sftp.json
 
-# Configuration
-wp-config.php
+# WordPress core — no need to version control
+app/public/wp-admin/
+app/public/wp-includes/
+app/public/wp-*.php
+app/public/index.php
+app/public/xmlrpc.php
+app/public/license.txt
+app/public/readme.html
 
-# Example themes
-/wp-content/themes/twenty*/
+# WordPress uploads — too large for git
+app/public/wp-content/uploads/
 
-# Example plugin
-/wp-content/plugins/hello.php
+# Other WordPress themes & plugins (only track ours)
+app/public/wp-content/themes/!(acm-irving)
+app/public/wp-content/plugins/
 
-# Uploads
-/wp-content/uploads/
+# OS files
+.DS_Store
+Thumbs.db
 
-# Log files
-*.log
-
-# htaccess
-/.htaccess
-
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
-
-# All themes
-#
-# Note: If you wish to whitelist themes,
-# uncomment the next line
-#/wp-content/themes
+# Node
+node_modules/
