@@ -16,7 +16,7 @@ Official website for the **ACM Irving Professional Chapter**, serving the Irving
 5. [Project Structure](#project-structure)
 6. [Development Workflow](#development-workflow)
 7. [Deploying to Production](#deploying-to-production)
-8. [WordPress Admin Guide](#wordpress-admin-guide)
+8. [WordPress Admin Guide](#wordpress-admin-guide) — includes full Events system documentation
 9. [Design System](#design-system)
 10. [Credentials & Access](#credentials--access)
 11. [Troubleshooting](#troubleshooting)
@@ -41,7 +41,7 @@ The site is hosted by ACM Global at `irving.acm.org`. The WordPress admin and cP
 | Fonts | Merriweather (serif) + Source Sans 3 (sans-serif) via Google Fonts |
 | Local Dev | Local by Flywheel |
 | Version Control | Git + GitHub |
-| Deployment | SFTP via VS Code extension |
+| Deployment | GitHub Actions (auto-deploy on merge to `main`) |
 
 ---
 
@@ -61,7 +61,6 @@ Open VS Code and install these extensions (`Cmd+Shift+X` to open Extensions pane
 
 | Extension | Publisher | Purpose |
 |---|---|---|
-| **SFTP** | Natizyskunk | Deploy files to production server |
 | **PHP Intelephense** | Ben Mewburn | PHP autocomplete |
 | **Prettier** | Prettier | Auto-format code |
 | **GitLens** | GitKraken | Git history in editor |
@@ -198,7 +197,8 @@ acm-irving/                              ← Open THIS folder in VS Code
 │                   ├── index.php        ← Fallback template
 │                   ├── header.php       ← Site-wide header & navigation
 │                   ├── footer.php       ← Site-wide footer
-│                   ├── front-page.php   ← Homepage template
+│                   ├── front-page.php   ← Homepage template (shows next 3 upcoming events)
+│                   ├── single-acm_event.php ← Individual event page (auto-used by WordPress)
 │                   │
 │                   ├── css/
 │                   │   ├── variables.css    ← ⭐ Colors, fonts, spacing — edit this to restyle everything
@@ -209,12 +209,19 @@ acm-irving/                              ← Open THIS folder in VS Code
 │                   │   ├── layout.css       ← Sections, cards, grids
 │                   │   └── responsive.css   ← All media queries (mobile/tablet)
 │                   │
-│                   └── js/
-│                       └── main.js          ← Mobile menu toggle, smooth scroll
+│                   ├── js/
+│                   │   └── main.js          ← Mobile menu toggle, smooth scroll
+│                   │
+│                   ├── page-templates/
+│                   │   └── events.php       ← Events listing page (upcoming + past, paginated)
+│                   │
+│                   └── template-parts/
+│                       └── event-card.php   ← ⭐ Shared event card — used by homepage and events page
 │
 ├── conf/                                ← Local by Flywheel config (don't edit)
 ├── logs/                                ← Local by Flywheel logs (don't edit)
 ├── .gitignore                           ← Excludes credentials, WP core, uploads
+├── CONTRIBUTING.md                      ← Contribution and PR workflow guide
 └── README.md                            ← You are here
 ```
 
@@ -294,34 +301,55 @@ For the full contribution workflow including how to open a Pull Request, see [CO
 
 ## Deploying to Production
 
-Deployment is done by the chapter chair or maintainer after a PR is merged into `main`. If you have deploy access, here's how to push changes to the live site:
-
-### Option A — Upload Changed Files Only (Recommended for small changes)
+Deployment is **fully automated via GitHub Actions**. Every time a PR is merged into `main`, GitHub detects changes to theme files and automatically FTPs them to the production server. No manual steps needed.
 
 ```
-Cmd+Shift+P → SFTP: Upload Changed Files
+PR merged into main
+        ↓
+GitHub Actions detects changes in themes/acm-irving/**
+        ↓
+FTP-Deploy-Action uploads only changed files to production
+        ↓
+Live site updated automatically ✅
 ```
 
-This only uploads files modified since the last upload — fast and safe.
+You can watch deployments run in real time under the **Actions** tab on GitHub:
+`https://github.com/vichu/acm-irving-website/actions`
 
-### Option B — Upload Entire Theme (Use after major changes)
+### How It Works
 
-```
-Cmd+Shift+P → SFTP: Upload Project
-```
+The workflow lives at `.github/workflows/deploy.yml` and uses [SamKirkland/FTP-Deploy-Action@v4.3.6](https://github.com/SamKirkland/FTP-Deploy-Action). It:
 
-This uploads all theme files. Use when you've added new files or restructured things.
+- Triggers **only on pushes to `main`** — branch pushes (PRs in progress) are ignored
+- Triggers **only when theme files change** — pushes to README, CONTRIBUTING, etc. skip deployment
+- Uploads only the **diff** (changed files only), not the full theme on every run
+- Excludes `.git`, `.DS_Store`, and `node_modules` automatically
 
-### Option C — Upload a Single File (Quickest for one-line fixes)
+### GitHub Secrets Required
 
-1. Open the file in VS Code
-2. Right-click in the editor → **"SFTP: Upload Active File"**
+The workflow reads credentials from GitHub Secrets — never stored in the repo. These are already configured, but if they ever need to be updated go to:
+
+**GitHub → Settings → Secrets and variables → Actions**
+
+| Secret Name | What it stores |
+|---|---|
+| `FTP_HOST` | `190.92.158.4` |
+| `FTP_USERNAME` | `irvinghosting` |
+| `FTP_PASSWORD` | cPanel FTP password |
 
 ### After Deploying
 
 Visit [https://irving.acm.org](https://irving.acm.org) and verify your changes look correct. If something looks wrong:
-1. Check the SFTP log in VS Code Output panel (`Cmd+Shift+U`)
+1. Check the **Actions** tab on GitHub for error logs
 2. Hard refresh the browser (`Cmd+Shift+R`) to clear cache
+
+### Emergency Manual Deploy
+
+If GitHub Actions is down or you need to deploy a hotfix immediately without going through a PR, you can still deploy manually via VS Code:
+
+1. Install the **SFTP** extension by Natizyskunk in VS Code
+2. Ensure `sftp.json` is configured (see credentials reference below)
+3. `Cmd+Shift+P` → **SFTP: Upload Project**
 
 ---
 
@@ -332,16 +360,71 @@ Visit [https://irving.acm.org](https://irving.acm.org) and verify your changes l
 - **Local (development):** `http://acm-irving.local/wp-admin`
 - **Production:** `https://irving.acm.org/wp-admin`
 
-### Adding Events
+---
 
-Events are currently displayed as placeholder content in `front-page.php`. To add real events:
+### Managing Events
 
-1. Go to **Posts → Add New**
-2. Assign the post to the **"Events"** category
-3. Fill in title, description, and set the publish date to the event date
-4. Click **Publish**
+Events are the most frequently updated part of the site. They are managed through a custom **Events** post type in WP Admin — no code changes needed.
 
-The homepage will automatically pull the 3 most recent events from the Events category.
+#### How the Events System Works
+
+| URL | What it does |
+|---|---|
+| `/events/` | Lists all upcoming events (3 per page), then past events (3 per page) |
+| `/events/my-event-slug/` | Individual event detail page, auto-generated by WordPress |
+
+- **Upcoming events** are sorted soonest first
+- **Past events** appear automatically once the event date passes — most recently completed first
+- Both sections paginate independently (clicking through past events doesn't affect upcoming, and vice versa)
+- The homepage shows the next 3 upcoming events automatically
+
+#### Adding a New Event
+
+1. Go to **WP Admin → Events → Add New**
+2. Enter the **event title** at the top (e.g. "AI & Machine Learning Panel")
+3. In the **block editor** (main content area), write the full event description — agenda, speakers, what attendees can expect, parking info, etc.
+4. Fill in the **Event Details** box below the editor:
+
+| Field | Example | Notes |
+|---|---|---|
+| Event Date | `04/17/2026` | Required — controls upcoming vs past sorting |
+| Time | `6:00 – 8:30 PM` | Displayed on event card and detail page |
+| Location | `Irving Convention Center` | Displayed on event card and detail page |
+| Ticket / Entry Info | `Free for Members` | Shown on card and sidebar |
+| RSVP / Registration URL | `https://eventbrite.com/...` | Powers the RSVP button — leave blank to show Details only |
+
+5. Click **Save** (top right)
+
+> ⚠️ **Turn off starter patterns** in the block editor to avoid unwanted layout templates being applied. Go to the **three-dot menu (⋮) → Preferences → General → turn off "Show starter patterns"**.
+
+#### Editing an Existing Event
+
+1. Go to **WP Admin → Events**
+2. Click the event title to open it
+3. Update any fields in the editor or Event Details box
+4. Click **Save**
+
+Changes appear immediately on both the events listing page and the individual event page.
+
+#### How Past Events Work
+
+You never need to manually move an event to "past" — the site compares `_event_date` against today's date on every page load:
+
+- If the event date is **today or in the future** → shown in Upcoming Events
+- If the event date has **already passed** → automatically shown in Past Events, most recent first
+- On the individual event page, the RSVP button is automatically replaced with "This event has already taken place"
+
+#### Troubleshooting: Event Page Shows Blank or Wrong Layout
+
+If `/events/your-event-slug/` shows a blank page or the wrong layout:
+
+1. Go to **WP Admin → Settings → Permalinks**
+2. Click **Save Changes** (no changes needed — this flushes URL routing rules)
+3. Refresh the event page
+
+This is required any time the Events post type is first registered on a new WordPress install.
+
+---
 
 ### Adding Pages
 
@@ -350,6 +433,8 @@ The homepage will automatically pull the 3 most recent events from the Events ca
 3. Add content using the WordPress block editor
 4. Click **Publish**
 5. Go to **Appearance → Menus** and add the new page to the navigation
+
+---
 
 ### Updating Social Media Links
 
