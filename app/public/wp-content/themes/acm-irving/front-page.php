@@ -11,7 +11,7 @@ get_header(); ?>
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <span class="hero-eyebrow">ACM Irving Professional Chapter · Irving, TX</span>
-        <h1>Connecting Computing Professionals in the Heart of Irving & DFW</h1>
+        <h1>Connecting Computing Professionals in the Heart of Irving &amp; DFW</h1>
         <p>A professional chapter of the Association for Computing Machinery — uniting developers, engineers, researchers, and technology leaders across Irving and the greater Dallas–Fort Worth metroplex.</p>
         <div class="hero-btns">
             <a href="#membership" class="btn btn-gold">Join the Chapter</a>
@@ -85,7 +85,7 @@ get_header(); ?>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>Irving chapter events</strong> — access to local meetups, workshops, and speaker series in the DFW area</span>
+                        <span><strong>Irving chapter events</strong> — access to local meetups, workshops, and speaker series in Irving &amp; the DFW area</span>
                     </li>
                 </ul>
                 <a href="https://www.acm.org/membership" target="_blank" rel="noopener" class="btn btn-blue">
