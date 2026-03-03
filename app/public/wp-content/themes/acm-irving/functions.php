@@ -208,3 +208,113 @@ function acm_irving_save_event_meta( $post_id ) {
     }
 }
 add_action( 'save_post_acm_event', 'acm_irving_save_event_meta' );
+
+
+// ── Officers Custom Post Type ─────────────────────────────────────
+function acm_irving_register_officers() {
+    register_post_type( 'acm_officer', [
+        'labels' => [
+            'name'               => 'Officers',
+            'singular_name'      => 'Officer',
+            'add_new'            => 'Add New Officer',
+            'add_new_item'       => 'Add New Officer',
+            'edit_item'          => 'Edit Officer',
+            'new_item'           => 'New Officer',
+            'view_item'          => 'View Officer',
+            'search_items'       => 'Search Officers',
+            'not_found'          => 'No officers found',
+            'not_found_in_trash' => 'No officers found in Trash',
+            'menu_name'          => 'Officers',
+        ],
+        'public'        => false,   // no individual officer URL pages needed
+        'show_ui'       => true,    // still shows in WP Admin
+        'show_in_menu'  => true,
+        'menu_icon'     => 'dashicons-groups',
+        'menu_position' => 6,
+        'supports'      => [ 'title', 'editor', 'thumbnail' ],
+        'show_in_rest'  => true,
+    ]);
+}
+add_action( 'init', 'acm_irving_register_officers' );
+
+
+// ── Officer Meta Fields ───────────────────────────────────────────
+function acm_irving_officer_meta_box() {
+    add_meta_box(
+        'acm_officer_details',
+        'Officer Details',
+        'acm_irving_render_officer_meta',
+        'acm_officer',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'acm_irving_officer_meta_box' );
+
+function acm_irving_render_officer_meta( $post ) {
+    wp_nonce_field( 'acm_officer_meta', 'acm_officer_nonce' );
+    $title    = get_post_meta( $post->ID, '_officer_title',    true );
+    $duties   = get_post_meta( $post->ID, '_officer_duties',   true );
+    $email    = get_post_meta( $post->ID, '_officer_email',    true );
+    $linkedin = get_post_meta( $post->ID, '_officer_linkedin', true );
+    $order    = get_post_meta( $post->ID, '_officer_order',    true );
+    ?>
+    <style>
+        .acm-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 8px 0; }
+        .acm-meta-field { display: flex; flex-direction: column; gap: 6px; }
+        .acm-meta-field label { font-weight: 600; font-size: 13px; }
+        .acm-meta-field input, .acm-meta-field textarea { padding: 6px 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        .acm-meta-full { grid-column: 1 / -1; }
+    </style>
+    <div class="acm-meta-grid">
+        <div class="acm-meta-field">
+            <label for="officer_title">🏷 Role / Title <span style="color:red">*</span></label>
+            <input type="text" id="officer_title" name="officer_title" value="<?php echo esc_attr($title); ?>" placeholder="Chapter President"/>
+        </div>
+        <div class="acm-meta-field">
+            <label for="officer_order">↕ Display Order</label>
+            <input type="number" id="officer_order" name="officer_order" value="<?php echo esc_attr($order); ?>" placeholder="1" min="1"/>
+        </div>
+        <div class="acm-meta-field acm-meta-full">
+            <label for="officer_duties">📋 Duties &amp; Responsibilities</label>
+            <textarea id="officer_duties" name="officer_duties" rows="3" placeholder="Leads the chapter, chairs meetings, represents ACM Irving at regional events..."><?php echo esc_textarea($duties); ?></textarea>
+        </div>
+        <div class="acm-meta-field">
+            <label for="officer_email">✉️ Email Address</label>
+            <input type="email" id="officer_email" name="officer_email" value="<?php echo esc_attr($email); ?>" placeholder="president@irving.acm.org"/>
+        </div>
+        <div class="acm-meta-field">
+            <label for="officer_linkedin">🔗 LinkedIn URL</label>
+            <input type="url" id="officer_linkedin" name="officer_linkedin" value="<?php echo esc_attr($linkedin); ?>" placeholder="https://linkedin.com/in/..."/>
+        </div>
+    </div>
+    <p style="margin-top:12px; color:#666; font-size:13px;">💡 Use the <strong>Featured Image</strong> panel on the right to set the officer's photo.</p>
+    <p style="color:#666; font-size:13px;">✏️ Write the officer's bio in the block editor above.</p>
+    <?php
+}
+
+function acm_irving_save_officer_meta( $post_id ) {
+    if ( ! isset( $_POST['acm_officer_nonce'] ) ) return;
+    if ( ! wp_verify_nonce( $_POST['acm_officer_nonce'], 'acm_officer_meta' ) ) return;
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+
+    $fields = [
+        '_officer_title'    => 'officer_title',
+        '_officer_duties'   => 'officer_duties',
+        '_officer_email'    => 'officer_email',
+        '_officer_linkedin' => 'officer_linkedin',
+        '_officer_order'    => 'officer_order',
+    ];
+
+    foreach ( $fields as $meta_key => $field_name ) {
+        if ( isset( $_POST[$field_name] ) ) {
+            update_post_meta( $post_id, $meta_key, sanitize_text_field( $_POST[$field_name] ) );
+        }
+    }
+    // Sanitize duties as textarea
+    if ( isset( $_POST['officer_duties'] ) ) {
+        update_post_meta( $post_id, '_officer_duties', sanitize_textarea_field( $_POST['officer_duties'] ) );
+    }
+}
+add_action( 'save_post_acm_officer', 'acm_irving_save_officer_meta' );
