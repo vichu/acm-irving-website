@@ -11,7 +11,7 @@ get_header(); ?>
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <span class="hero-eyebrow">ACM Irving Professional Chapter · Irving, TX</span>
-        <h1>Connecting Computing Professionals in the Heart of DFW</h1>
+        <h1>Connecting Computing Professionals in the Heart of Irving & DFW</h1>
         <p>A professional chapter of the Association for Computing Machinery — uniting developers, engineers, researchers, and technology leaders across Irving and the greater Dallas–Fort Worth metroplex.</p>
         <div class="hero-btns">
             <a href="#membership" class="btn btn-gold">Join the Chapter</a>
@@ -65,27 +65,27 @@ get_header(); ?>
                 <ul class="benefits-list">
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>ACM Digital Library access</strong> — the world's largest computing research database with over 600,000 articles</span>
+                        <span><strong>Communications of the ACM</strong> — complimentary 3-month electronic subscription to ACM's flagship publication</span>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>Discounted ACM publications</strong> — Communications of the ACM and all specialty journals</span>
+                        <span><strong>acm.org email address</strong> — a personal @acm.org email forwarding address with filtering</span>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>Priority local event access</strong> — early registration for Irving chapter meetups, workshops, and speaker series</span>
+                        <span><strong>TechNews</strong> — the latest news in computing, delivered 3× weekly</span>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>DFW professional networking</strong> — connect with the Irving and DFW computing community through exclusive chapter events</span>
+                        <span><strong>CareerNews</strong> — career and industry news delivered bi-monthly</span>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>Career resources</strong> — ACM CareerCenter job board, mentorship opportunities, and professional development</span>
+                        <span><strong>MemberNet</strong> — ACM people and events newsletter, delivered quarterly</span>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>Learning platform discounts</strong> — O'Reilly online learning and other premier partner platforms</span>
+                        <span><strong>Irving chapter events</strong> — access to local meetups, workshops, and speaker series in the DFW area</span>
                     </li>
                 </ul>
                 <a href="https://www.acm.org/membership" target="_blank" rel="noopener" class="btn btn-blue">
