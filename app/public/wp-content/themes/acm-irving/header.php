@@ -12,26 +12,17 @@
 <header class="site-header">
     <div class="header-inner">
 
-        <!-- Logo -->
+        <!-- Logo — uses <picture> so browser picks the right size natively, no CSS needed -->
         <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo" aria-label="<?php bloginfo('name'); ?> Home">
-            <!-- Desktop -->
-            <img
-                src="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo-1.gif"
-                alt="<?php bloginfo('name'); ?>"
-                class="logo-desktop"
-            />
-            <!-- Tablet -->
-            <img
-                src="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo_tablet.svg"
-                alt="<?php bloginfo('name'); ?>"
-                class="logo-tablet"
-            />
-            <!-- Mobile -->
-            <img
-                src="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo_mobile.svg"
-                alt="<?php bloginfo('name'); ?>"
-                class="logo-mobile"
-            />
+            <picture>
+                <source media="(max-width: 480px)" srcset="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo_mobile.svg"/>
+                <source media="(max-width: 960px)" srcset="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo_tablet.svg"/>
+                <img
+                    src="https://irving.acm.org/wp-content/uploads/2026/03/acm_logo-1.gif"
+                    alt="ACM Irving – Association for Computing Machinery"
+                    height="48"
+                />
+            </picture>
         </a>
 
         <!-- Primary Navigation -->

@@ -123,32 +123,17 @@ get_header(); ?>
             // Query upcoming events (posts with future dates or tagged as events)
             // For now using placeholder posts — replace with ACM Events custom post type later
             $events = new WP_Query([
-                'post_type'      => 'post',
+                'post_type'      => 'acm_event',
                 'posts_per_page' => 3,
-                'category_name'  => 'events',
-                'orderby'        => 'date',
+                'meta_key'       => '_event_date',
+                'orderby'        => 'meta_value',
                 'order'          => 'DESC',
             ]);
 
             if ($events->have_posts()) :
-                while ($events->have_posts()) : $events->the_post(); ?>
-                    <div class="event-card">
-                        <div class="event-date-box">
-                            <span class="month"><?php echo get_the_date('M'); ?></span>
-                            <span class="day"><?php echo get_the_date('d'); ?></span>
-                            <span class="year"><?php echo get_the_date('Y'); ?></span>
-                        </div>
-                        <div class="event-info">
-                            <h3><?php the_title(); ?></h3>
-                            <p><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
-                            <div class="event-meta">
-                                <span>📍 Irving, TX</span>
-                                <span>🎟 Open to Members</span>
-                            </div>
-                        </div>
-                        <a href="<?php the_permalink(); ?>" class="btn btn-rsvp">Details</a>
-                    </div>
-                <?php endwhile;
+                while ($events->have_posts()) : $events->the_post();
+                    get_template_part( 'template-parts/event-card', null, [ 'variant' => 'upcoming' ] );
+                endwhile;
                 wp_reset_postdata();
             else : ?>
                 <!-- Placeholder events shown when no posts exist yet -->
