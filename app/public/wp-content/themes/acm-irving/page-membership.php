@@ -67,6 +67,30 @@ get_header();
                 </div>
             </div>
 
+            <div class="membership-benefit">
+                <span class="benefit-icon">📰</span>
+                <div>
+                    <h3>Communications of the ACM</h3>
+                    <p>Complimentary three-month electronic subscription to ACM's flagship publication — one of the most respected journals in computing.</p>
+                </div>
+            </div>
+
+            <div class="membership-benefit">
+                <span class="benefit-icon">📧</span>
+                <div>
+                    <h3>acm.org Email Address</h3>
+                    <p>A personal @acm.org email forwarding address with filtering — a recognizable mark of your computing community membership.</p>
+                </div>
+            </div>
+
+            <div class="membership-benefit">
+                <span class="benefit-icon">📬</span>
+                <div>
+                    <h3>ACM E-Newsletters</h3>
+                    <p><strong>TechNews</strong> — computing news 3× weekly. <strong>CareerNews</strong> — career and industry news bi-monthly. <strong>MemberNet</strong> — ACM people and events quarterly.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
