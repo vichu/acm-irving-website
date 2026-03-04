@@ -58,7 +58,6 @@ function acm_irving_fallback_menu() {
     echo '<li><a href="' . esc_url(home_url('/about')) . '">About</a></li>';
     echo '<li><a href="' . esc_url(home_url('/events')) . '">Events</a></li>';
     echo '<li><a href="' . esc_url(home_url('/officers')) . '">Officers</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/resources')) . '">Resources</a></li>';
     echo '<li><a href="' . esc_url(home_url('/contact')) . '">Contact</a></li>';
     echo '<li><a href="https://www.acm.org/membership" target="_blank" class="nav-cta">Join ACM</a></li>';
     echo '</ul>';
