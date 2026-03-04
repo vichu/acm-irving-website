@@ -112,6 +112,9 @@ get_header();
                 <a href="https://www.acm.org" target="_blank" rel="noopener" class="btn btn-outline">Visit ACM.org →</a>
                 <a href="https://dl.acm.org" target="_blank" rel="noopener" class="btn btn-outline">ACM Digital Library →</a>
             </div>
+            <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-muted); line-height: 1.6;">
+                <strong>Note:</strong> ACM global membership is separate from membership in the ACM Irving Professional Chapter. You do not need a global ACM membership to join our local chapter or attend our events.
+            </p>
         </div>
 
     </div>
@@ -122,9 +125,9 @@ get_header();
     <div class="section-inner section-inner--center">
         <span class="eyebrow">Get Involved</span>
         <h2>Ready to Join the Irving Computing Community?</h2>
-        <p>Membership starts at the ACM global level. Once you're a member, connect with us to attend local Irving chapter events and get plugged into the DFW computing network.</p>
+        <p>Join the ACM Irving Professional Chapter to support local programs, connect with computing professionals across Irving and DFW, and have a voice in how the chapter grows.</p>
         <div class="cta-btns">
-            <a href="https://www.acm.org/membership" target="_blank" rel="noopener" class="btn btn-gold">Join ACM →</a>
+            <a href="<?php echo esc_url(home_url('/membership')); ?>" class="btn btn-gold">Join the Chapter →</a>
             <a href="<?php echo esc_url(home_url('/contact')); ?>" class="btn btn-outline-light">Contact Us</a>
         </div>
     </div>

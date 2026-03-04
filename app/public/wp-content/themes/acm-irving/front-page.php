@@ -56,55 +56,46 @@ get_header(); ?>
         <div class="membership-grid">
 
             <div>
-                <span class="eyebrow">Membership</span>
-                <h2 class="section-title">Join ACM Irving Today</h2>
+                <span class="eyebrow">Chapter Membership</span>
+                <h2 class="section-title">Join the ACM Irving Chapter</h2>
                 <p style="color: var(--text-muted); font-size: 16px; line-height: 1.7;">
-                    Become part of a global network of computing professionals while enjoying the
-                    tight-knit benefits of a local Irving chapter.
+                    We are a local Professional Chapter of the ACM. By becoming a member, you are supporting the programs and meetups we organize and connecting with the local computing community in Irving and DFW.
                 </p>
                 <ul class="benefits-list">
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>Communications of the ACM</strong> — complimentary 3-month electronic subscription to ACM's flagship publication</span>
+                        <span><strong>Priority event invitations</strong> — first access to chapter meetups, workshops, and speaker series</span>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>acm.org email address</strong> — a personal @acm.org email forwarding address with filtering</span>
+                        <span><strong>Have a voice</strong> — members have a say in how the chapter is run and can take on leadership roles</span>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>TechNews</strong> — the latest news in computing, delivered 3× weekly</span>
+                        <span><strong>Shape the chapter</strong> — influence the topics, speakers, and events we organize</span>
                     </li>
                     <li>
                         <span class="check-icon">✓</span>
-                        <span><strong>CareerNews</strong> — career and industry news delivered bi-monthly</span>
-                    </li>
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <span><strong>MemberNet</strong> — ACM people and events newsletter, delivered quarterly</span>
-                    </li>
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <span><strong>Irving chapter events</strong> — access to local meetups, workshops, and speaker series in Irving &amp; the DFW area</span>
+                        <span><strong>Support the community</strong> — your membership directly funds chapter operations and events</span>
                     </li>
                 </ul>
-                <a href="https://www.acm.org/membership" target="_blank" rel="noopener" class="btn btn-blue">
-                    Become an ACM Member →
+                <a href="<?php echo esc_url(home_url('/membership')); ?>" class="btn btn-blue">
+                    Learn More &amp; Join →
                 </a>
             </div>
 
             <div class="membership-card">
-                <h3>ACM Professional Membership</h3>
-                <p class="subtitle">Annual membership via ACM Global</p>
-                <div class="price-amount">$99</div>
-                <div class="price-period">per year · Professional rate</div>
-                <a href="https://www.acm.org/membership" target="_blank" rel="noopener" class="btn btn-gold btn-block">
-                    Join at ACM.org
+                <h3>ACM Irving Chapter</h3>
+                <p class="subtitle">Local chapter membership · Irving, TX</p>
+                <div class="price-amount">$150</div>
+                <div class="price-period">per year</div>
+                <a href="<?php echo esc_url(home_url('/membership')); ?>" class="btn btn-gold btn-block">
+                    Become a Member →
                 </a>
                 <hr class="card-divider"/>
-                <p class="card-note">Student rate: $19/yr &nbsp;·&nbsp; ACM-W members may qualify for additional discounts</p>
+                <p class="card-note">Same rate for Professional and Student members</p>
                 <hr class="card-divider"/>
-                <p class="card-note">After joining ACM globally, contact us to connect with the Irving chapter and attend local events.</p>
+                <p class="card-note">Our events are free to attend — membership supports chapter operations and gives you a voice in how we run.</p>
             </div>
 
         </div>

@@ -50,12 +50,12 @@
 
             <!-- Membership Links -->
             <div class="footer-col">
-                <h4>Membership</h4>
+                <h4>Chapter Membership</h4>
                 <ul>
-                    <li><a href="https://www.acm.org/membership" target="_blank" rel="noopener">Join ACM</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/membership')); ?>">Local Benefits</a></li>
-                    <li><a href="https://careercenter.acm.org" target="_blank" rel="noopener">Career Center</a></li>
-                    <li><a href="https://learning.acm.org" target="_blank" rel="noopener">ACM Learning</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/membership')); ?>">Join the Chapter</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/membership')); ?>#faq">Membership FAQ</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/officers')); ?>">Chapter Officers</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/contact')); ?>">Contact Us</a></li>
                 </ul>
             </div>
 
