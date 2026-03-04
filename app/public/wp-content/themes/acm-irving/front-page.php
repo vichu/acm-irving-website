@@ -78,6 +78,18 @@ get_header(); ?>
                         <span class="check-icon">✓</span>
                         <span><strong>Support the community</strong> — your membership directly funds chapter operations and events</span>
                     </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span><strong>Communications of the ACM</strong> — complimentary 3-month electronic subscription to ACM's flagship publication</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span><strong>acm.org email address</strong> — a personal @acm.org email forwarding address with filtering</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <span><strong>ACM E-Newsletters</strong> — TechNews 3× weekly, CareerNews bi-monthly, and MemberNet quarterly</span>
+                    </li>
                 </ul>
                 <a href="<?php echo esc_url(home_url('/membership')); ?>" class="btn btn-blue">
                     Learn More &amp; Join →
