@@ -267,8 +267,8 @@ git branch -d your-branch-name
 
 ### ✅ Welcome contributions
 
-- New page templates (About, Officers, Resources, Contact)
-- Event listings and content updates
+- New slug-based page templates (create `page-yourslug.php` in theme root)
+- Event and officer content updates
 - Bug fixes for layout or styling issues
 - Accessibility improvements
 - Mobile responsiveness fixes

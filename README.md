@@ -16,7 +16,7 @@ Official website for the **ACM Irving Professional Chapter**, serving the Irving
 5. [Project Structure](#project-structure)
 6. [Development Workflow](#development-workflow)
 7. [Deploying to Production](#deploying-to-production)
-8. [WordPress Admin Guide](#wordpress-admin-guide) — includes full Events system documentation
+8. [WordPress Admin Guide](#wordpress-admin-guide) — Events, Officers, and page management
 9. [Design System](#design-system)
 10. [Credentials & Access](#credentials--access)
 11. [Troubleshooting](#troubleshooting)
@@ -127,7 +127,7 @@ VS Code, Git, and Local by Flywheel all work from the same root folder. ✅
 1. Go to **Appearance → Menus**
 2. Click **"Create a new menu"**
 3. Name it `Primary Navigation`
-4. Add pages: Home, About, Events, Officers, Resources, Contact
+4. Add pages: Home, About, Events, Officers, Membership, Contact
 5. Under **"Menu Settings"** check **Primary Navigation**
 6. Click **Save Menu**
 
@@ -141,30 +141,7 @@ code ~/Local\ Sites/acm-irving/
 
 You should see `app/`, `conf/`, `logs/` in the VS Code sidebar.
 
-### Step 7 — Configure SFTP for Deployment
-
-1. In VS Code press `Cmd+Shift+P` → type **"SFTP: Config"** → press Enter
-2. This creates `.vscode/sftp.json` — paste the following:
-
-```json
-{
-  "name": "ACM Irving Production",
-  "host": "190.92.158.4",
-  "protocol": "ftp",
-  "port": 21,
-  "username": "irvinghosting",
-  "password": "GET_FROM_CHAPTER_CHAIR",
-  "context": "app/public/wp-content/themes/acm-irving",
-  "remotePath": "/public_html/wp-content/themes/acm-irving",
-  "uploadOnSave": false,
-  "passive": true,
-  "ignore": [".git", ".DS_Store", "node_modules"]
-}
-```
-
-> ⚠️ Get the actual password from the chapter chair. Never commit this file to Git — it is already in `.gitignore`.
-
-### Step 8 — Verify Everything Works
+### Step 7 — Verify Everything Works
 
 Visit `http://acm-irving.local` in your browser. You should see the ACM Irving homepage with:
 - Sticky header with logo and navigation
@@ -212,8 +189,14 @@ acm-irving/                              ← Open THIS folder in VS Code
 │                   ├── js/
 │                   │   └── main.js          ← Mobile menu toggle, smooth scroll
 │                   │
+│                   ├── page-about.php       ← About page (auto-loads for slug: about)
+│                   ├── page-events.php      ← Events listing page (auto-loads for slug: events)
+│                   ├── page-officers.php    ← Officers page with selector UI (auto-loads for slug: officers)
+│                   ├── page-membership.php  ← Membership page (auto-loads for slug: membership)
+│                   ├── page-contact.php     ← Contact page (auto-loads for slug: contact)
+│                   │
 │                   ├── page-templates/
-│                   │   └── events.php       ← Events listing page (upcoming + past, paginated)
+│                   │   └── events.php       ← Legacy template (superseded by page-events.php)
 │                   │
 │                   └── template-parts/
 │                       └── event-card.php   ← ⭐ Shared event card — used by homepage and events page
@@ -268,7 +251,7 @@ acm-irving/                              ← Open THIS folder in VS Code
 | Homepage content | `front-page.php` |
 | Button styles | `css/buttons.css` |
 | Mobile layout | `css/responsive.css` |
-| Add a new page template | Create `page-templates/your-page.php` |
+| Add a new page | Create `page-yourslug.php` in the theme root (auto-loads for pages with that slug) |
 
 ### Git Best Practices
 
@@ -423,6 +406,40 @@ If `/events/your-event-slug/` shows a blank page or the wrong layout:
 3. Refresh the event page
 
 This is required any time the Events post type is first registered on a new WordPress install.
+
+---
+
+### Managing Officers
+
+Officer profiles are managed through a custom **Officers** post type in WP Admin — no code changes needed.
+
+#### Adding a New Officer
+
+1. Go to **WP Admin → Officers → Add New**
+2. Enter the **officer's full name** as the title
+3. Write their **bio** in the block editor (main content area)
+4. Fill in the **Officer Details** box below the editor:
+
+| Field | Example | Notes |
+|---|---|---|
+| Role / Title | `Chapter President` | Required — shown as the role badge |
+| Display Order | `1` | Controls left-to-right order on the Officers page (1 = first) |
+| Duties & Responsibilities | `Leads the chapter, chairs meetings...` | Shown in the detail panel |
+| Email Address | `president@irving.acm.org` | Shown as a mailto button |
+| LinkedIn URL | `https://linkedin.com/in/...` | Shown as a LinkedIn button |
+
+5. Set the **Featured Image** (right sidebar) — this becomes the officer's photo
+6. Click **Publish**
+
+> 💡 If no photo is set, a placeholder circle with the officer's initial displays automatically.
+
+#### Display Order
+
+Set **Display Order** to control the sequence of buttons on the Officers page:
+- President → `1`
+- Vice President → `2`
+- Secretary → `3`
+- Treasurer → `4`
 
 ---
 
