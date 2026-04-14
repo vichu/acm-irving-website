@@ -2249,3 +2249,322 @@ img { max-width: 100%; height: auto; display: block; }
     background: var(--border);
 }
 .payment-divider span { font-size: var(--text-sm); color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+
+/* ── Payment Options (Zelle + alternatives) ── */
+.payment-options {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--space-8);
+    align-items: start;
+    margin-top: var(--space-10);
+}
+.payment-option {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    border: 1px solid var(--border);
+}
+.payment-option--primary {
+    border: 2px solid var(--blue);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.payment-option-badge {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: var(--space-3);
+}
+.payment-option-header h3 { font-size: var(--text-lg); font-weight: 700; color: var(--blue-dark); margin-bottom: var(--space-2); }
+.payment-option-header p  { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-5); }
+
+/* QR Code block */
+.payment-qr-block {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+/* Clickable QR trigger button */
+.payment-qr-trigger {
+    display: block;
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: var(--radius);
+    margin: 0 auto;
+}
+.payment-qr-trigger:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 4px;
+}
+.payment-qr-img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: var(--radius);
+    border: 2px solid var(--border);
+    padding: var(--space-3);
+    background: var(--white);
+    display: block;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.payment-qr-trigger:hover .payment-qr-img {
+    opacity: 0.88;
+    transform: scale(1.02);
+}
+.payment-qr-hint {
+    position: absolute;
+    bottom: var(--space-3);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.72);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 5px 12px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+.payment-qr-trigger:not(:hover) .payment-qr-hint {
+    opacity: 0.85;
+}
+.payment-qr-caption {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: var(--space-2);
+    margin-bottom: 0;
+}
+
+/* ── Payment option description ── */
+.payment-option-desc {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+}
+
+/* ── Desktop/mobile visibility toggles ── */
+.desktop-only { display: block; }
+.mobile-only  { display: none;  }
+@media (max-width: 768px) {
+    .desktop-only { display: none;  }
+    .mobile-only  { display: block; }
+}
+
+/* ── Mobile Zelle email copy block ── */
+.payment-mobile-zelle { margin-bottom: var(--space-5); }
+.zelle-email-copy {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-3) var(--space-4);
+    margin-top: var(--space-3);
+}
+.zelle-email-address {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue-dark);
+    word-break: break-all;
+}
+.zelle-copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    padding: var(--space-2) var(--space-3);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+    flex-shrink: 0;
+}
+.zelle-copy-btn:hover  { background: var(--blue-dark); }
+.zelle-copy-btn.copied { background: #16a34a; }
+
+/* ── Online banking callout ── */
+.payment-online-banking {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    margin-top: var(--space-5);
+}
+.payment-online-banking-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.payment-online-banking strong { display: block; font-size: var(--text-sm); color: var(--blue-dark); margin-bottom: var(--space-1); }
+.payment-online-banking p { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+/* ── QR Modal ── */
+.qr-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.qr-modal[hidden] { display: none; }
+.qr-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+.qr-modal-content {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8) var(--space-8) var(--space-6);
+    text-align: center;
+    max-width: 480px;
+    width: calc(100vw - 48px);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    animation: qrModalIn 0.2s ease;
+}
+@keyframes qrModalIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+}
+.qr-modal-close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: background 0.15s, color 0.15s;
+}
+.qr-modal-close:hover { background: var(--border); color: var(--blue-dark); }
+.qr-modal-label {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: var(--space-4);
+}
+.qr-modal-img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: var(--space-2);
+    display: block;
+    margin: 0 auto var(--space-5);
+}
+.qr-modal-sub {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Step list */
+.payment-step-list { display: flex; flex-direction: column; gap: var(--space-3); }
+.payment-step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--text-body);
+    line-height: 1.6;
+}
+.payment-step a { color: var(--blue); font-weight: 600; }
+.payment-step-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--blue-dark);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+}
+
+/* Options divider */
+.payment-options-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding-top: var(--space-10);
+}
+.payment-options-divider::before,
+.payment-options-divider::after {
+    content: '';
+    width: 1px;
+    flex: 1;
+    background: var(--border);
+}
+.payment-options-divider span {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Secondary panel */
+.payment-option--secondary h3 { font-size: var(--text-lg); font-weight: 700; color: var(--blue-dark); margin-bottom: var(--space-5); }
+.payment-alt-item {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--border);
+}
+.payment-alt-item:last-child { border-bottom: none; padding-bottom: 0; }
+.payment-alt-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.payment-alt-item strong { display: block; font-size: var(--text-base); color: var(--blue-dark); margin-bottom: var(--space-1); }
+.payment-alt-item p { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.6; margin: 0; }
+.payment-alt-item a { color: var(--blue); font-weight: 600; }
+
+@media (max-width: 900px) {
+    .payment-options {
+        grid-template-columns: 1fr;
+    }
+    .payment-options-divider {
+        flex-direction: row;
+        padding-top: 0;
+    }
+    .payment-options-divider::before,
+    .payment-options-divider::after {
+        width: auto;
+        height: 1px;
+        flex: 1;
+    }
+}

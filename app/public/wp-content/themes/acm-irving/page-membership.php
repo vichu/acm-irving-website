@@ -111,7 +111,7 @@ get_header();
             <div class="pricing-label">Chapter Membership</div>
             <div class="pricing-amount">$150</div>
             <div class="pricing-period">per year</div>
-            <div class="pricing-note">Same rate for both Professional and Student members</div>
+            <div class="pricing-note">One rate for all members — no separate student rate</div>
             <hr class="pricing-divider"/>
             <ul class="pricing-includes">
                 <li>✓ Priority event invitations</li>
@@ -127,26 +127,185 @@ get_header();
     </div>
 </section>
 
-<!-- PAYMENT PLACEHOLDER -->
+<!-- PAYMENT SECTION -->
 <section class="section section-light" id="join">
     <div class="section-inner">
         <span class="eyebrow">Pay for Membership</span>
         <h2 class="section-title">How to Pay</h2>
-        <p class="section-sub">Online payment is coming soon. In the meantime, here's how to complete your chapter membership.</p>
+        <p class="section-sub">Pay your $150 annual membership fee via Zelle, then email your receipt to confirm your membership.</p>
 
-        <div class="payment-placeholder">
-            <div class="payment-placeholder-icon">💳</div>
-            <h3>Online Payment — Coming Soon</h3>
-            <p>We are setting up online payment via PayPal. Once available, you'll be able to pay your $150 annual membership fee directly from this page.</p>
-            <div class="payment-divider">
-                <span>In the meantime</span>
+        <div class="payment-options">
+
+            <!-- ZELLE OPTION -->
+            <div class="payment-option payment-option--primary">
+                <div class="payment-option-header">
+                    <span class="payment-option-badge">Recommended</span>
+                    <h3>Pay via Zelle</h3>
+                </div>
+
+                <!-- DESKTOP: QR code -->
+                <div class="payment-qr-block desktop-only">
+                    <p class="payment-option-desc">On a computer? Scan the QR code with your phone's banking app, or log into your bank's website and send via Zelle.</p>
+                    <button class="payment-qr-trigger" id="qrOpenBtn" aria-label="Enlarge QR code for scanning">
+                        <img
+                            src="<?php echo esc_url( get_template_directory_uri() . '/images/zelle-qr-code.png' ); ?>"
+                            alt="Zelle QR code for ACM Irving chapter membership payment"
+                            class="payment-qr-img"
+                        />
+                        <span class="payment-qr-hint">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                            Tap to enlarge &amp; scan
+                        </span>
+                    </button>
+                    <p class="payment-qr-caption">Tap to enlarge · Scan with your phone's banking app</p>
+                </div>
+
+                <!-- MOBILE: copyable email -->
+                <div class="payment-mobile-zelle mobile-only">
+                    <p class="payment-option-desc">Open your bank's app, go to Zelle, and send to the address below.</p>
+                    <div class="zelle-email-copy">
+                        <span class="zelle-email-address">acmchapterirving@gmail.com</span>
+                        <button class="zelle-copy-btn" id="zelleCopyBtn" aria-label="Copy Zelle email address">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            <span id="zelleCopyLabel">Copy</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Steps -->
+                <div class="payment-step-list">
+                    <div class="payment-step">
+                        <span class="payment-step-num">1</span>
+                        <span class="step-desktop">Open your bank's mobile app or website and go to Zelle.</span>
+                        <span class="step-mobile">Open your bank's app and go to Zelle or Pay &amp; Transfer.</span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="payment-step-num">2</span>
+                        <span class="step-desktop">Scan the QR code with your phone, or search for <strong>acmchapterirving@gmail.com</strong>.</span>
+                        <span class="step-mobile">Tap Send and enter or paste <strong>acmchapterirving@gmail.com</strong>.</span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="payment-step-num">3</span>
+                        <span>Send <strong>$150</strong> with memo <strong>"Chapter Membership – [Your Full Name]"</strong>.</span>
+                    </div>
+                    <div class="payment-step">
+                        <span class="payment-step-num">4</span>
+                        <span>Email your payment receipt to <a href="mailto:acmchapterirving@gmail.com?subject=Chapter%20Membership%20Payment%20Receipt">acmchapterirving@gmail.com</a> with subject <strong>"Chapter Membership Payment Receipt"</strong>. Once received, we'll process it and send you a confirmation email.</span>
+                    </div>
+                </div>
+
+                <!-- Online banking callout (desktop only) -->
+                <div class="payment-online-banking desktop-only">
+                    <span class="payment-online-banking-icon">🏦</span>
+                    <div>
+                        <strong>Paying via your bank's website?</strong>
+                        <p>Log into your bank's online portal, go to Zelle or Transfers, and send $150 to <strong>acmchapterirving@gmail.com</strong>. No app or QR code needed.</p>
+                    </div>
+                </div>
             </div>
-            <p>Email us at <a href="mailto:acmchapterirving@gmail.com?subject=Chapter%20Membership%20Payment">acmchapterirving@gmail.com</a> with the subject <strong>"Chapter Membership Payment"</strong> and we'll send you payment instructions. We'll confirm your membership as soon as payment is received.</p>
-            <!-- PAYPAL PLACEHOLDER: Replace this comment with your PayPal button code once your account is ready -->
-        </div>
 
+            <!-- DIVIDER -->
+            <div class="payment-options-divider">
+                <span>or</span>
+            </div>
+
+            <!-- OTHER OPTIONS -->
+            <div class="payment-option payment-option--secondary">
+                <h3>Other Payment Options</h3>
+
+                <div class="payment-alt-item">
+                    <span class="payment-alt-icon">💳</span>
+                    <div>
+                        <strong>PayPal</strong>
+                        <p>Online payment via PayPal is coming soon. Once available, you'll be able to pay directly from this page.</p>
+                    </div>
+                </div>
+
+                <div class="payment-alt-item">
+                    <span class="payment-alt-icon">🏦</span>
+                    <div>
+                        <strong>Pay via bank details</strong>
+                        <p>Prefer to pay using bank details directly? Email us at <a href="mailto:acmchapterirving@gmail.com?subject=Membership%20Payment%20-%20Bank%20Details%20Request">acmchapterirving@gmail.com</a> and we'll share our bank details with you.</p>
+                    </div>
+                </div>
+
+                <div class="payment-alt-item">
+                    <span class="payment-alt-icon">✉️</span>
+                    <div>
+                        <strong>Not sure?</strong>
+                        <p>Email us at <a href="mailto:acmchapterirving@gmail.com?subject=Chapter%20Membership">acmchapterirving@gmail.com</a> and we'll walk you through the process.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- PAYPAL PLACEHOLDER: Replace this comment with your PayPal button code once your account is ready -->
     </div>
 </section>
+
+<!-- QR MODAL -->
+<div class="qr-modal" id="qrModal" role="dialog" aria-modal="true" aria-label="Zelle QR code" hidden>
+    <div class="qr-modal-backdrop" id="qrBackdrop"></div>
+    <div class="qr-modal-content">
+        <button class="qr-modal-close" id="qrCloseBtn" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <p class="qr-modal-label">Scan with your bank's Zelle app</p>
+        <img
+            src="<?php echo esc_url( get_template_directory_uri() . '/images/zelle-qr-code.png' ); ?>"
+            alt="Zelle QR code for ACM Irving chapter membership payment"
+            class="qr-modal-img"
+        />
+        <p class="qr-modal-sub">Send <strong>$150</strong> to <strong>acmchapterirving@gmail.com</strong></p>
+    </div>
+</div>
+
+<script>
+(function () {
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    // Show correct step text per device
+    document.querySelectorAll('.step-desktop').forEach(function (el) {
+        el.style.display = isMobile ? 'none' : 'inline';
+    });
+    document.querySelectorAll('.step-mobile').forEach(function (el) {
+        el.style.display = isMobile ? 'inline' : 'none';
+    });
+
+    // QR modal (desktop)
+    var qrBtn    = document.getElementById('qrOpenBtn');
+    var modal    = document.getElementById('qrModal');
+    var backdrop = document.getElementById('qrBackdrop');
+    var closeBtn = document.getElementById('qrCloseBtn');
+
+    if (qrBtn && modal) {
+        function openModal()  { modal.hidden = false; document.body.style.overflow = 'hidden'; closeBtn.focus(); }
+        function closeModal() { modal.hidden = true;  document.body.style.overflow = '';        qrBtn.focus(); }
+        qrBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && !modal.hidden) closeModal();
+        });
+    }
+
+    // Copy email (mobile)
+    var copyBtn   = document.getElementById('zelleCopyBtn');
+    var copyLabel = document.getElementById('zelleCopyLabel');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+            navigator.clipboard.writeText('acmchapterirving@gmail.com').then(function () {
+                copyLabel.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                setTimeout(function () {
+                    copyLabel.textContent = 'Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    }
+})();
+</script>
 
 <!-- FAQ -->
 <section class="section">
@@ -169,12 +328,12 @@ get_header();
 
             <div class="faq-item">
                 <h4>How do I pay for membership?</h4>
-                <p>Email us at <a href="mailto:acmchapterirving@gmail.com">acmchapterirving@gmail.com</a> and we'll send you payment details. Online payment options are coming soon.</p>
+                <p>Pay $150 via Zelle by scanning the QR code on this page (or send to <strong>acmchapterirving@gmail.com</strong>), then email your payment receipt to <a href="mailto:acmchapterirving@gmail.com?subject=Chapter%20Membership%20Payment%20Receipt">acmchapterirving@gmail.com</a>. If you prefer Zelle via manual bank details or need another option, email us and we'll help. PayPal payment will be available soon.</p>
             </div>
 
             <div class="faq-item">
                 <h4>Is there a student rate?</h4>
-                <p>Yes — membership is $150/year for both Professional and Student members while we are in our early stage of operations.</p>
+                <p>No — we do not have a separate rate for students. Membership is $150/year for all members.</p>
             </div>
 
         </div>
