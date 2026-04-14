@@ -105,7 +105,7 @@ get_header(); ?>
                     Become a Member →
                 </a>
                 <hr class="card-divider"/>
-                <p class="card-note">Same rate for Professional and Student members</p>
+                <p class="card-note">One rate for all members — no separate student rate</p>
                 <hr class="card-divider"/>
                 <p class="card-note">Our events are free to attend — membership supports chapter operations and gives you a voice in how we run.</p>
             </div>

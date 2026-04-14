@@ -36,8 +36,8 @@ get_header();
         <div class="contact-card">
             <span class="contact-card-icon">🤝</span>
             <h3>Join the Chapter</h3>
-            <p>Membership starts at the ACM global level. Join at ACM.org, then reach out to us to connect with the Irving chapter and attend local events.</p>
-            <a href="https://www.acm.org/membership" target="_blank" rel="noopener" class="contact-card-action">Join at ACM.org →</a>
+            <p>Become a chapter member for $150/year. Pay via Zelle and send your receipt to us — or email us and we'll walk you through it.</p>
+            <a href="<?php echo esc_url( home_url('/membership/#join') ); ?>" class="contact-card-action">Join the Chapter →</a>
         </div>
 
         <div class="contact-card">
