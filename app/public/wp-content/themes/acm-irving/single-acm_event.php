@@ -51,8 +51,8 @@ while ( have_posts() ) : the_post();
                 <?php endif; ?>
 
                 <?php if ( $reg_status !== 'success' ) : ?>
-                <h3>Register for This Event</h3>
-                <p class="reg-subtitle">Fill out the form below to reserve your spot. Your information is private and only visible to event organizers.</p>
+                <h3>Register as an Attendee</h3>
+                <p class="reg-subtitle">Fill out the form below to reserve your spot. We'll keep you informed about this event.</p>
 
                 <form method="post" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>">
                     <input type="hidden" name="action"       value="acm_event_register">
