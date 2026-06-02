@@ -84,6 +84,36 @@
     color: var(--white);
 }
 
+/* Details — outline, muted */
+.btn-details {
+    background: transparent;
+    color: var(--blue);
+    border-color: var(--blue);
+    font-size: var(--text-sm);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    white-space: nowrap;
+}
+.btn-details:hover {
+    background: var(--blue);
+    color: var(--white);
+}
+.btn-details-past {
+    background: transparent;
+    color: var(--gray-600);
+    border-color: var(--gray-400);
+    font-size: var(--text-sm);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    white-space: nowrap;
+}
+.btn-details-past:hover {
+    background: var(--gray-600);
+    color: var(--white);
+}
+
 /* Block — full width */
 .btn-block {
     display: block;
