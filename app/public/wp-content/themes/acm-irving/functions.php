@@ -3,6 +3,8 @@
  * ACM Irving Theme Functions
  */
 
+require_once get_template_directory() . '/inc/event-registrations.php';
+
 // ── Enqueue Styles & Scripts ──────────────────────────────────────
 function acm_irving_enqueue_assets() {
 
@@ -58,6 +60,14 @@ function acm_irving_enqueue_assets() {
     wp_enqueue_style(
         'acm-footer',
         get_template_directory_uri() . '/css/footer.css',
+        ['acm-variables'],
+        '1.0.0'
+    );
+
+    // Registrations form
+    wp_enqueue_style(
+        'acm-registrations',
+        get_template_directory_uri() . '/css/registrations.css',
         ['acm-variables'],
         '1.0.0'
     );

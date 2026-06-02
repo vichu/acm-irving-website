@@ -17,9 +17,10 @@ Official website for the **ACM Irving Professional Chapter**, serving the Irving
 6. [Development Workflow](#development-workflow)
 7. [Deploying to Production](#deploying-to-production)
 8. [WordPress Admin Guide](#wordpress-admin-guide) — Events, Officers, and page management
-9. [Design System](#design-system)
-10. [Credentials & Access](#credentials--access)
-11. [Troubleshooting](#troubleshooting)
+9. [Cloudflare Turnstile Configuration](#cloudflare-turnstile-configuration)
+10. [Design System](#design-system)
+11. [Credentials & Access](#credentials--access)
+12. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -178,28 +179,32 @@ acm-irving/                              ← Open THIS folder in VS Code
 │                   ├── single-acm_event.php ← Individual event page (auto-used by WordPress)
 │                   │
 │                   ├── css/
-│                   │   ├── variables.css    ← ⭐ Colors, fonts, spacing — edit this to restyle everything
-│                   │   ├── typography.css   ← Headings, body text, links
-│                   │   ├── buttons.css      ← All button styles
-│                   │   ├── header.css       ← Sticky nav styles
-│                   │   ├── footer.css       ← Footer styles
-│                   │   ├── layout.css       ← Sections, cards, grids
-│                   │   └── responsive.css   ← All media queries (mobile/tablet)
+│                   │   ├── variables.css        ← ⭐ Colors, fonts, spacing — edit this to restyle everything
+│                   │   ├── typography.css        ← Headings, body text, links
+│                   │   ├── buttons.css           ← All button styles
+│                   │   ├── header.css            ← Sticky nav styles
+│                   │   ├── footer.css            ← Footer styles
+│                   │   ├── layout.css            ← Sections, cards, grids
+│                   │   ├── registrations.css     ← Event registration form styles
+│                   │   └── responsive.css        ← All media queries (mobile/tablet)
+│                   │
+│                   ├── inc/
+│                   │   └── event-registrations.php  ← Registration DB, form handler, admin page
 │                   │
 │                   ├── js/
-│                   │   └── main.js          ← Mobile menu toggle, smooth scroll
+│                   │   └── main.js               ← Mobile menu toggle, smooth scroll
 │                   │
-│                   ├── page-about.php       ← About page (auto-loads for slug: about)
-│                   ├── page-events.php      ← Events listing page (auto-loads for slug: events)
-│                   ├── page-officers.php    ← Officers page with selector UI (auto-loads for slug: officers)
-│                   ├── page-membership.php  ← Membership page (auto-loads for slug: membership)
-│                   ├── page-contact.php     ← Contact page (auto-loads for slug: contact)
+│                   ├── page-about.php            ← About page (auto-loads for slug: about)
+│                   ├── page-events.php           ← Events listing page (auto-loads for slug: events)
+│                   ├── page-officers.php         ← Officers page with selector UI (auto-loads for slug: officers)
+│                   ├── page-membership.php       ← Membership page (auto-loads for slug: membership)
+│                   ├── page-contact.php          ← Contact page (auto-loads for slug: contact)
 │                   │
 │                   ├── page-templates/
-│                   │   └── events.php       ← Legacy template (superseded by page-events.php)
+│                   │   └── events.php            ← Legacy template (superseded by page-events.php)
 │                   │
 │                   └── template-parts/
-│                       └── event-card.php   ← ⭐ Shared event card — used by homepage and events page
+│                       └── event-card.php        ← ⭐ Shared event card — used by homepage and events page
 │
 ├── conf/                                ← Local by Flywheel config (don't edit)
 ├── logs/                                ← Local by Flywheel logs (don't edit)
@@ -409,6 +414,30 @@ This is required any time the Events post type is first registered on a new Word
 
 ---
 
+### Managing Event Registrations
+
+Attendees can register for upcoming events directly on the event detail page. Registrations are stored privately and never shown to the public.
+
+#### Viewing Registrations
+
+1. Go to **WP Admin → Events → Registrations**
+2. Use the **Filter by Event** dropdown to select an event
+3. Click **View** — the table below shows all registrants with name, email, phone, and registration timestamp
+
+#### Exporting to CSV
+
+With an event selected, click **Export CSV** to download a spreadsheet of all registrants for that event. Use this to send event reminders or follow-up emails.
+
+#### Deleting Spam or Test Registrations
+
+1. Check the box next to any rows you want to remove (use the header checkbox to select all)
+2. Click **Delete Selected** and confirm the prompt
+3. A success notice confirms how many rows were removed
+
+> **Note:** Cloudflare Turnstile protects the registration form against bots. See [Cloudflare Turnstile Configuration](#cloudflare-turnstile-configuration) for setup.
+
+---
+
 ### Managing Officers
 
 Officer profiles are managed through a custom **Officers** post type in WP Admin — no code changes needed.
@@ -461,6 +490,48 @@ Social links are hardcoded in `footer.php`. To update them:
 2. Find the `$socials` array near the top of the footer section
 3. Replace `'#'` with the actual social media URL for each platform
 4. Save and deploy
+
+---
+
+## Cloudflare Turnstile Configuration
+
+The event registration form is protected by [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) — a free, privacy-friendly bot challenge that stops automated submissions without showing users a CAPTCHA puzzle.
+
+### How the Keys Work
+
+| Key | Visibility | Purpose |
+|---|---|---|
+| **Site key** | Public — embedded in the page HTML | Tells Cloudflare which widget to render |
+| **Secret key** | Private — never share or commit | Verifies the challenge server-side |
+
+### Local Development
+
+Turnstile is **automatically bypassed** on local environments (`WP_ENVIRONMENT_TYPE = 'local'`). No keys are needed for local development — the registration form works without any configuration.
+
+### Production Setup
+
+After deploying to production, configure both keys once through WP Admin:
+
+1. Go to **WP Admin → Events → Registrations**
+2. Expand **Turnstile Settings** at the top of the page
+3. Enter your **Site Key** and **Secret Key**
+4. Click **Save Keys**
+
+Keys are stored in the WordPress database — no file editing or server access needed.
+
+### Getting Your Keys
+
+1. Go to **[dash.cloudflare.com](https://dash.cloudflare.com)**
+2. Select your account from the account picker
+3. In the left sidebar, click **Turnstile** (under the "Security" group)  
+   → Direct path: `dash.cloudflare.com → [Your Account] → Turnstile`
+4. Click **Add widget**
+5. Enter a name (e.g. `ACM Irving Registration`) and add your domain (`irving.acm.org`)
+6. Choose **Managed** mode → click **Create**
+7. Copy the **Site Key** and **Secret Key** from the confirmation screen  
+   → You can always retrieve them later at `dash.cloudflare.com → [Your Account] → Turnstile → [Widget name] → Settings`
+
+> If you ever need to rotate the keys (e.g. after a suspected compromise), create a new widget in Cloudflare, update both keys in WP Admin, then delete the old widget.
 
 ---
 
