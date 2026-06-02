@@ -164,7 +164,7 @@ get_header();
                 <div class="payment-mobile-zelle mobile-only">
                     <p class="payment-option-desc">Open your bank's app, go to Zelle, and send to the address below.</p>
                     <div class="zelle-email-copy">
-                        <span class="zelle-email-address">acmchapterirving@gmail.com</span>
+                        <span class="zelle-email-address">acmirving7919</span>
                         <button class="zelle-copy-btn" id="zelleCopyBtn" aria-label="Copy Zelle email address">
                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                             <span id="zelleCopyLabel">Copy</span>
@@ -181,8 +181,8 @@ get_header();
                     </div>
                     <div class="payment-step">
                         <span class="payment-step-num">2</span>
-                        <span class="step-desktop">Scan the QR code with your phone, or search for <strong>acmchapterirving@gmail.com</strong>.</span>
-                        <span class="step-mobile">Tap Send and enter or paste <strong>acmchapterirving@gmail.com</strong>.</span>
+                        <span class="step-desktop">Scan the QR code with your phone, or search for <strong>acmirving7919</strong>.</span>
+                        <span class="step-mobile">Tap Send and enter or paste <strong>acmirving7919</strong>.</span>
                     </div>
                     <div class="payment-step">
                         <span class="payment-step-num">3</span>
@@ -199,7 +199,7 @@ get_header();
                     <span class="payment-online-banking-icon">🏦</span>
                     <div>
                         <strong>Paying via your bank's website?</strong>
-                        <p>Log into your bank's online portal, go to Zelle or Transfers, and send $150 to <strong>acmchapterirving@gmail.com</strong>. No app or QR code needed.</p>
+                        <p>Log into your bank's online portal, go to Zelle or Transfers, and send $150 to <strong>acmirving7919</strong>. No app or QR code needed.</p>
                     </div>
                 </div>
             </div>
@@ -256,7 +256,7 @@ get_header();
             alt="Zelle QR code for ACM Irving chapter membership payment"
             class="qr-modal-img"
         />
-        <p class="qr-modal-sub">Send <strong>$150</strong> to <strong>acmchapterirving@gmail.com</strong></p>
+        <p class="qr-modal-sub">Send <strong>$150</strong> to <strong>acmirving7919</strong></p>
     </div>
 </div>
 
@@ -294,7 +294,7 @@ get_header();
     var copyLabel = document.getElementById('zelleCopyLabel');
     if (copyBtn) {
         copyBtn.addEventListener('click', function () {
-            navigator.clipboard.writeText('acmchapterirving@gmail.com').then(function () {
+            navigator.clipboard.writeText('acmirving7919').then(function () {
                 copyLabel.textContent = 'Copied!';
                 copyBtn.classList.add('copied');
                 setTimeout(function () {
@@ -328,7 +328,7 @@ get_header();
 
             <div class="faq-item">
                 <h4>How do I pay for membership?</h4>
-                <p>Pay $150 via Zelle by scanning the QR code on this page (or send to <strong>acmchapterirving@gmail.com</strong>), then email your payment receipt to <a href="mailto:acmchapterirving@gmail.com?subject=Chapter%20Membership%20Payment%20Receipt">acmchapterirving@gmail.com</a>. If you prefer Zelle via manual bank details or need another option, email us and we'll help. PayPal payment will be available soon.</p>
+                <p>Pay $150 via Zelle by scanning the QR code on this page (or send to <strong>acmirving7919</strong>), then email your payment receipt to <a href="mailto:acmchapterirving@gmail.com?subject=Chapter%20Membership%20Payment%20Receipt">acmchapterirving@gmail.com</a>. If you prefer Zelle via manual bank details or need another option, email us and we'll help. PayPal payment will be available soon.</p>
             </div>
 
             <div class="faq-item">
