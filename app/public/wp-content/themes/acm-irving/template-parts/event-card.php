@@ -34,7 +34,7 @@ if ( $variant === 'past' ) $card_class .= ' event-card--past';
     </div>
 
     <div class="event-info">
-        <h3><?php the_title(); ?></h3>
+        <h3><a href="<?php the_permalink(); ?>" class="event-title-link"><?php the_title(); ?></a></h3>
         <?php
         $excerpt = get_the_excerpt() ?: wp_trim_words( get_the_content(), 25 );
         if ( $excerpt ) : ?>
@@ -48,10 +48,11 @@ if ( $variant === 'past' ) $card_class .= ' event-card--past';
         </div>
     </div>
 
-    <?php if ( $rsvp_url && $variant !== 'past' ) : ?>
-        <a href="<?php echo esc_url( $rsvp_url ); ?>" class="btn btn-rsvp" target="_blank" rel="noopener">RSVP</a>
-    <?php elseif ( $variant !== 'past' ) : ?>
-        <a href="<?php the_permalink(); ?>" class="btn btn-rsvp">Details</a>
-    <?php endif; ?>
+    <div class="event-card-actions">
+        <?php if ( $rsvp_url && $variant !== 'past' ) : ?>
+            <a href="<?php echo esc_url( $rsvp_url ); ?>" class="btn btn-rsvp" target="_blank" rel="noopener">RSVP</a>
+        <?php endif; ?>
+        <a href="<?php the_permalink(); ?>" class="btn <?php echo $variant === 'past' ? 'btn-details-past' : 'btn-details'; ?>">Details</a>
+    </div>
 
 </div>
